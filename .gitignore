@@ -1,0 +1,27 @@
+.DS_Store
+/.env.local
+/.env.local.php
+/.env
+/.env.test
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+
+.idea
+
+.phpunit.result.cache
+/phpunit.xml
+
+/phpunit.xml
+.phpunit.result.cache
+
+/config/jwt/*.pem
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
