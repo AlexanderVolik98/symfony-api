@@ -7,8 +7,6 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\BookCategory;
-use App\Entity\BookToBookFormat;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -76,8 +74,7 @@ class Book
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->formats = new ArrayCollection();
-        $this->formats = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Model\BookListItem;
 use App\Model\BookListResponse;
 use App\Repository\BookCategoryRepository;
 use App\Repository\BookRepository;
+use App\Repository\ReviewRepository;
 use App\Service\BookService;
 use App\Tests\AbstractTestCase;
 use DateTime;
@@ -19,6 +20,7 @@ class BookServiceTest extends AbstractTestCase
 {
     public function testGetBookByCategoryNotFound(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookCategoryRepository = $this->createMock(BookCategoryRepository::class);
         $bookCategoryRepository->expects($this->once())
@@ -28,11 +30,12 @@ class BookServiceTest extends AbstractTestCase
 
         $this->expectException(BookCategoryNotFoundException::class);
 
-        (new BookService($bookRepository, $bookCategoryRepository))->getBookByCategory(130);
+        (new BookService($bookRepository, $bookCategoryRepository, $reviewRepository))->getBookByCategory(130);
     }
 
     public function testGetBooksByCategory(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookRepository->expects($this->once())
             ->method('findBooksByCategoryId')
@@ -45,7 +48,7 @@ class BookServiceTest extends AbstractTestCase
             ->with(130)
             ->willReturn(true);
 
-        $service = new BookService($bookRepository, $bookCategoryRepository);
+        $service = new BookService($bookRepository, $bookCategoryRepository, $reviewRepository);
 
         $expected = new BookListResponse([$this->createBookItemModel()]);
 
@@ -58,6 +61,8 @@ class BookServiceTest extends AbstractTestCase
             ->setTitle('Test Book')
             ->setSlug('test-book')
             ->setMeap(false)
+            ->setIsbn('123123')
+            ->setDescription('test desc')
             ->setImage('test Image')
             ->setCategories(new ArrayCollection())
             ->setPublicationDate(new DateTimeImmutable('2020-10-10'))

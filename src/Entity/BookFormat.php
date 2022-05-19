@@ -61,8 +61,8 @@ class BookFormat
         $this->comment = $comment;
     }
 
-    public function getId(int $id): ?int
+    public function getId(): ?int
     {
-
+        return $this->id;
     }
 }

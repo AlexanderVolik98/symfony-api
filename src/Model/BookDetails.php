@@ -42,9 +42,11 @@ class BookDetails
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle(): string
@@ -52,9 +54,11 @@ class BookDetails
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getSlug(): string
@@ -62,9 +66,11 @@ class BookDetails
         return $this->slug;
     }
 
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     public function getImage(): string
@@ -72,9 +78,11 @@ class BookDetails
         return $this->image;
     }
 
-    public function setImage(string $image): void
+    public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
     }
 
     public function getAuthors(): array
@@ -82,9 +90,11 @@ class BookDetails
         return $this->authors;
     }
 
-    public function setAuthors(array $authors): void
+    public function setAuthors(array $authors): self
     {
         $this->authors = $authors;
+
+        return $this;
     }
 
     public function isMeap(): bool
@@ -92,9 +102,11 @@ class BookDetails
         return $this->meap;
     }
 
-    public function setMeap(bool $meap): void
+    public function setMeap(bool $meap): self
     {
         $this->meap = $meap;
+
+        return $this;
     }
 
     public function getPublicationDate(): int
@@ -102,9 +114,11 @@ class BookDetails
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(int $publicationDate): void
+    public function setPublicationDate(int $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
+
+        return $this;
     }
 
     public function getRating()
@@ -112,9 +126,11 @@ class BookDetails
         return $this->rating;
     }
 
-    public function setRating($rating): void
+    public function setRating($rating): self
     {
         $this->rating = $rating;
+
+        return $this;
     }
 
     public function getReviews(): int
@@ -122,9 +138,11 @@ class BookDetails
         return $this->reviews;
     }
 
-    public function setReviews(int $reviews): void
+    public function setReviews(int $reviews): self
     {
         $this->reviews = $reviews;
+
+        return $this;
     }
 
     public function getCategories(): array
@@ -132,9 +150,11 @@ class BookDetails
         return $this->categories;
     }
 
-    public function setCategories(array $categories): void
+    public function setCategories(array $categories): self
     {
         $this->categories = $categories;
+
+        return $this;
     }
 
     public function getFormats(): array
@@ -142,8 +162,10 @@ class BookDetails
         return $this->formats;
     }
 
-    public function setFormats(array $formats): void
+    public function setFormats(array $formats): self
     {
         $this->formats = $formats;
+
+        return $this;
     }
 }
