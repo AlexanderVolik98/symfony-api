@@ -50,17 +50,21 @@ class Review
         return $this->book;
     }
 
-    public function setBook(Book $book): void
+    public function setBook(Book $book): self
     {
         $this->book = $book;
+
+        return $this;
     }
 
     /**
      * @ORM\PrePersist
      */
-    public function setCreatedAtValue(): void
+    public function setCreatedAtValue(): self
     {
         $this->createdAt = new DateTimeImmutable();
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -68,9 +72,11 @@ class Review
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(?int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function getRating(): int
@@ -78,9 +84,11 @@ class Review
         return $this->rating;
     }
 
-    public function setRating(int $rating): void
+    public function setRating(int $rating): self
     {
         $this->rating = $rating;
+
+        return $this;
     }
 
     public function getContent(): string
@@ -88,9 +96,11 @@ class Review
         return $this->content;
     }
 
-    public function setContent(string $content): void
+    public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
     public function getAuthor(): string
@@ -98,9 +108,11 @@ class Review
         return $this->author;
     }
 
-    public function setAuthor(string $author): void
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
     }
 
     public function getCreatedAt(): DateTimeInterface
@@ -108,8 +120,10 @@ class Review
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeInterface $createdAt): void
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 }

@@ -22,6 +22,8 @@ class Review
     public function setId(int $id): self
     {
         $this->id = $id;
+
+        return $this;
     }
 
     public function getContent(): string
@@ -32,6 +34,8 @@ class Review
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
     }
 
     public function getAuthor(): string
@@ -42,6 +46,8 @@ class Review
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
     }
 
     public function getRating(): int
@@ -52,6 +58,8 @@ class Review
     public function setRating(int $rating): self
     {
         $this->rating = $rating;
+
+        return $this;
     }
 
     public function getCreatedAt(): int
@@ -62,5 +70,7 @@ class Review
     public function setCreatedAt(int $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 }

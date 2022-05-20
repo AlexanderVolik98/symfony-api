@@ -27,6 +27,8 @@ class ReviewPage
     public function setItems(array $items): self
     {
         $this->items = $items;
+
+        return $this;
     }
 
     public function getRating(): float
@@ -37,6 +39,8 @@ class ReviewPage
     public function setRating(float $rating): self
     {
         $this->rating = $rating;
+
+        return $this;
     }
 
     public function getPage(): int
@@ -47,6 +51,8 @@ class ReviewPage
     public function setPage(int $page): self
     {
         $this->page = $page;
+
+        return $this;
     }
 
     public function getPages(): int
@@ -57,6 +63,8 @@ class ReviewPage
     public function setPages(int $pages): self
     {
         $this->pages = $pages;
+
+        return $this;
     }
 
     public function getPerPage(): int
@@ -67,6 +75,8 @@ class ReviewPage
     public function setPerPage(int $perPage): self
     {
         $this->perPage = $perPage;
+
+        return $this;
     }
 
     public function getTotal(): int
@@ -77,5 +87,7 @@ class ReviewPage
     public function setTotal(int $total): self
     {
         $this->total = $total;
+
+        return $this;
     }
 }
