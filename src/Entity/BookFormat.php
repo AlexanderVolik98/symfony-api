@@ -36,9 +36,11 @@ class BookFormat
         return $this->title;
     }
 
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -46,9 +48,11 @@ class BookFormat
         return $this->description;
     }
 
-    public function setDescription(?string $description): void
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     public function getComment(): ?string
@@ -56,9 +60,11 @@ class BookFormat
         return $this->comment;
     }
 
-    public function setComment(?string $comment): void
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
     }
 
     public function getId(): ?int

@@ -7,7 +7,6 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Model\ReviewPage;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +22,7 @@ class ReviewController extends AbstractController
 
     /**
      * @Route("/api/v1/book/{id}/reviews", name="reviews", methods={"GET"})
-     * @OA\Parameter(name="page", in="query", description="page number", @OA\Schema(type="integer"))
+     * @OA\Parameter(name="page", in="query", description="review page number", @OA\Schema(type="integer"))
      * @OA\Response(
      *     response=200,
      *     description="desc",

@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use App\Entity\BookCategory;
+use App\Mapper\BookModelMappableInterface;
 
-class BookDetails
+class BookDetails implements BookModelMappableInterface
 {
     private int $id;
 
@@ -23,7 +24,7 @@ class BookDetails
 
     private int $publicationDate;
 
-    private $rating;
+    private int $rating;
 
     private int $reviews;
 

@@ -75,19 +75,14 @@ class Book
     {
         $this->categories = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->formats = new ArrayCollection();
     }
 
-    /**
-     * @return Collection
-     */
     public function getFormats(): Collection
     {
         return $this->formats;
     }
 
-    /**
-     * @param Collection $formats
-     */
     public function setFormats(Collection $formats): self
     {
         $this->formats = $formats;

@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
-class BookListItem
+use App\Mapper\BookModelMappableInterface;
+
+class BookListItem implements BookModelMappableInterface
 {
     private int $id;
 

@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Review;
+use Countable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Traversable;
 
 class ReviewRepository extends ServiceEntityRepository
 {
@@ -19,6 +21,10 @@ class ReviewRepository extends ServiceEntityRepository
         return $this->count(['book' => $id]);
     }
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
+     */
     public function getBookTotalRatingSum(int $id): int
     {
         return (int) $this->_em->createQuery('SELECT SUM(r.rating) FROM App\Entity\Review r WHERE r.book = :id')
@@ -26,7 +32,10 @@ class ReviewRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getPageByBookId(int $id, int $offset, int $limit): Paginator
+    /**
+     * @return Traversable&Countable
+     */
+    public function getPageByBookId(int $id, int $offset, int $limit)
     {
         $query = $this->_em->createQuery('SELECT r FROM App\Entity\Review r WHERE r.book = :id ORDER BY r.createdAt DESC')
             ->setParameter('id', $id)

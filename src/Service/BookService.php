@@ -6,6 +6,7 @@ use App\Entity\Book;
 use App\Entity\BookCategory;
 use App\Entity\BookToBookFormat;
 use App\Exception\BookCategoryNotFoundException;
+use App\Mapper\BookMapper;
 use App\Model\BookCategory as BookCategoryModel;
 use App\Model\BookDetails;
 use App\Model\BookFormat;
@@ -21,15 +22,18 @@ class BookService
     private BookRepository $bookRepository;
     private BookCategoryRepository $bookCategoryRepository;
     private ReviewRepository $reviewRepository;
+    private RatingService $ratingService;
 
     public function __construct(
         BookRepository $bookRepository,
         BookCategoryRepository $bookCategoryRepository,
-        ReviewRepository $reviewRepository
+        ReviewRepository $reviewRepository,
+        RatingService $ratingService
     ) {
         $this->bookCategoryRepository = $bookCategoryRepository;
         $this->bookRepository = $bookRepository;
         $this->reviewRepository = $reviewRepository;
+        $this->ratingService = $ratingService;
     }
 
     public function getBookByCategory(int $categoryId): BookListResponse
@@ -39,7 +43,7 @@ class BookService
         }
 
         return new BookListResponse(array_map(
-            [$this, 'map'],
+            fn (Book $book) => BookMapper::map($book, new BookListItem()),
             $this->bookRepository->findBooksByCategoryId($categoryId)
         ));
     }
@@ -48,11 +52,7 @@ class BookService
     {
         $book = $this->bookRepository->getById($id);
         $reviews = $this->reviewRepository->countByBookId($book->getId());
-        $rating = 0;
-
-        if ($reviews > 0) {
-            $rating = $this->reviewRepository->getBookTotalRatingSum($book->getId()) / $reviews;
-        }
+        $rating = $this->ratingService->calcReviewRatingForBook($book->getId(), $reviews);
 
         $categories = $book->getCategories()
             ->map(fn (BookCategory $bookCategory) => new BookCategoryModel(
@@ -60,14 +60,7 @@ class BookService
                 )
             );
 
-        return (new BookDetails())
-            ->setId($book->getId())
-            ->setTitle($book->getTitle())
-            ->setSlug($book->getSlug())
-            ->setImage($book->getImage())
-            ->setAuthors($book->getAuthors())
-            ->setMeap($book->isMeap())
-            ->setPublicationDate($book->getPublicationDate()->getTimestamp())
+        return BookMapper::map($book, new BookDetails())
             ->setRating($rating)
             ->setReviews($reviews)
             ->setFormats($this->mapFormats($book->getFormats()))
@@ -89,18 +82,5 @@ class BookService
                 ->setPrice($formatJoin->getPrice())
                 ->setDiscountPercent($formatJoin->getDiscountPercent())
             )->toArray();
-    }
-
-    private function map(Book $book): BookListItem
-    {
-        return (new BookListItem())
-            ->setId($book->getId())
-            ->setTitle($book->getTitle())
-            ->setSlug($book->getSlug())
-            ->setImage($book->getImage())
-            ->setAuthors($book->getAuthors())
-            ->setMeap($book->isMeap())
-            ->setPublicationDate($book->getPublicationDate()
-            ->getTimestamp());
     }
 }

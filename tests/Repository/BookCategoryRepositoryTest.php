@@ -19,8 +19,8 @@ class BookCategoryRepositoryTest extends AbstractRepositoryTest
 
     public function testFindAllsortedByTitle()
     {
-        $devices = (new BookCategory())->setTitle('Devices')->setSlug('devices');
         $android = (new BookCategory())->setTitle('Android')->setSlug('android');
+        $devices = (new BookCategory())->setTitle('Devices')->setSlug('devices');
         $computer = (new BookCategory())->setTitle('Computer')->setSlug('computer');
 
         foreach ([$devices, $android, $computer] as $category) {

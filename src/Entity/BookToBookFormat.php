@@ -3,11 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Book;
-use App\Entity\BookFormat;
+use App\Repository\BookToBookFormatRepository;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=BookToBookFormatRepository::class)
  */
 class BookToBookFormat
 {
@@ -40,68 +39,52 @@ class BookToBookFormat
      */
     private BookFormat $format;
 
-    /**
-     * @return float
-     */
     public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @param float $price
-     */
-    public function setPrice(float $price): void
+    public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getDiscountPercent(): ?int
     {
         return $this->discountPercent;
     }
 
-    /**
-     * @param int|null $discountPercent
-     */
-    public function setDiscountPercent(?int $discountPercent): void
+    public function setDiscountPercent(?int $discountPercent): self
     {
         $this->discountPercent = $discountPercent;
+
+        return $this;
     }
 
-    /**
-     * @return Book
-     */
     public function getBook(): Book
     {
         return $this->book;
     }
 
-    /**
-     * @param Book $book
-     */
-    public function setBook(Book $book): void
+    public function setBook(Book $book): self
     {
         $this->book = $book;
+
+        return $this;
     }
 
-    /**
-     * @return BookFormat
-     */
     public function getFormat(): BookFormat
     {
         return $this->format;
     }
 
-    /**
-     * @param BookFormat $format
-     */
-    public function setFormat(BookFormat $format): void
+    public function setFormat(BookFormat $format): self
     {
         $this->format = $format;
+
+        return $this;
     }
 
     public function getId(): ?int
