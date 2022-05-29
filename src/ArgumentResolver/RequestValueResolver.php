@@ -4,7 +4,7 @@ namespace App\ArgumentResolver;
 
 use App\Exception\RequestBodyConvertException;
 use App\Exception\ValidationException;
-use App\Model\SubscriberRequest;
+use App\Model\ModelValidatableInterface;
 use Generator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Throwable;
 
-class SubscribeRequestValueResolver implements ArgumentValueResolverInterface
+class RequestValueResolver implements ArgumentValueResolverInterface
 {
     private SerializerInterface $serializer;
     private ValidatorInterface $validator;
@@ -27,7 +27,13 @@ class SubscribeRequestValueResolver implements ArgumentValueResolverInterface
 
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        return SubscriberRequest::class == $argument->getType();
+        if (null === $argument->getType()) {
+            return false;
+        }
+
+        $interfaces = class_implements($argument->getType());
+
+        return count($interfaces) > 0 && in_array(ModelValidatableInterface::class, $interfaces);
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): ?Generator

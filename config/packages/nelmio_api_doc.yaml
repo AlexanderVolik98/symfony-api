@@ -3,8 +3,8 @@ nelmio_api_doc:
         servers:
             - url: http://symfony-edu.lo
         info:
-            title: Publisher API
-            description: This is an awesome app!
+            title: API for manning.com
+            description: https://github.com/AlexanderVolik98/symfony-api
             version: 1.0.0
     areas: # to filter documented areas
         path_patterns:

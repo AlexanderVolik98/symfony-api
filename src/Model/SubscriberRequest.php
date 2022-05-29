@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class SubscriberRequest
+class SubscriberRequest implements ModelValidatableInterface
 {
     /**
      * @Assert\NotBlank()
