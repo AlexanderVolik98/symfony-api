@@ -15,6 +15,9 @@ class BookMapper
             ->setImage($book->getImage())
             ->setAuthors($book->getAuthors())
             ->setMeap($book->isMeap())
+            ->setLiveVideo($book->isLiveVideo())
+            ->setLiveProj($book->isLiveProj())
+            ->setAudio($book->isAudio())
             ->setPublicationDate($book->getPublicationDate()->getTimestamp());
     }
 }

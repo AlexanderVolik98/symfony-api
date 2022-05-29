@@ -21,6 +21,12 @@ class BookListItem implements BookModelMappableInterface
 
     private bool $meap;
 
+    private bool $liveProj;
+
+    private bool $audio;
+
+    private bool $liveVideo;
+
     private int $publicationDate;
 
     public function getId(): int
@@ -109,6 +115,42 @@ class BookListItem implements BookModelMappableInterface
     public function setPublicationDate(int $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
+
+        return $this;
+    }
+
+    public function isLiveProj(): bool
+    {
+        return $this->liveProj;
+    }
+
+    public function setLiveProj(bool $liveProj): self
+    {
+        $this->liveProj = $liveProj;
+
+        return $this;
+    }
+
+    public function isAudio(): bool
+    {
+        return $this->audio;
+    }
+
+    public function setAudio(bool $audio): self
+    {
+        $this->audio = $audio;
+
+        return $this;
+    }
+
+    public function isLiveVideo(): bool
+    {
+        return $this->liveVideo;
+    }
+
+    public function setLiveVideo(bool $liveVideo): self
+    {
+        $this->liveVideo = $liveVideo;
 
         return $this;
     }

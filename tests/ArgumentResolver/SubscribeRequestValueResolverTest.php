@@ -2,9 +2,11 @@
 
 namespace App\Tests\ArgumentResolver;
 
-use App\ArgumentResolver\SubscribeRequestValueResolver;
+use App\ArgumentResolver\RequestValueResolver;
+use App\Entity\Subscriber;
 use App\Exception\RequestBodyConvertException;
 use App\Exception\ValidationException;
+use App\Model\SignUpRequest;
 use App\Model\SubscriberRequest;
 use App\Tests\AbstractTestCase;
 use Exception;
@@ -29,18 +31,42 @@ class SubscribeRequestValueResolverTest extends AbstractTestCase
         $this->validator = $this->createMock(ValidatorInterface::class);
     }
 
-    public function testSupports(): void
+    public function providerModel(): array
     {
-        $meta = new ArgumentMetadata('some', SubscriberRequest::class, false, false, null, false);
+        return [
+            [SubscriberRequest::class],
+            [SignUpRequest::class],
+        ];
+    }
+
+    /**
+     * @dataProvider providerModel
+     */
+    public function testSupports($model): void
+    {
+        $meta = new ArgumentMetadata('some', $model, false, false, null, false);
 
         $this->assertTrue($this->createResolver()->supports(new Request(), $meta));
     }
 
-    public function testNotSupports(): void
+    public function provider(): array
     {
-        $meta = new ArgumentMetadata('some', SubscriberRequest::class, false, false, null, false);
+        return [
+            [1.25],
+            ['some'],
+            [1],
+            [Subscriber::class],
+        ];
+    }
 
-        $this->assertTrue($this->createResolver()->supports(new Request(), $meta));
+    /**
+     * @dataProvider provider
+     */
+    public function testNotSupports($argument): void
+    {
+        $meta = new ArgumentMetadata('some', $argument, false, false, null, false);
+
+        $this->assertFalse($this->createResolver()->supports(new Request(), $meta));
     }
 
     public function testResolveThrowsWhenDeserialize(): void
@@ -109,8 +135,8 @@ class SubscribeRequestValueResolverTest extends AbstractTestCase
         $this->assertEquals($body, $actual->current());
     }
 
-    private function createResolver(): SubscribeRequestValueResolver
+    private function createResolver(): RequestValueResolver
     {
-        return new SubscribeRequestValueResolver($this->serializer, $this->validator);
+        return new RequestValueResolver($this->serializer, $this->validator);
     }
 }

@@ -20,6 +20,12 @@ class BookDetails implements BookModelMappableInterface
      */
     private array $authors;
 
+    private bool $liveProj;
+
+    private bool $audio;
+
+    private bool $liveVideo;
+
     private bool $meap;
 
     private int $publicationDate;
@@ -27,6 +33,42 @@ class BookDetails implements BookModelMappableInterface
     private int $rating;
 
     private int $reviews;
+
+    public function isLiveProj(): bool
+    {
+        return $this->liveProj;
+    }
+
+    public function setLiveProj(bool $liveProj): self
+    {
+        $this->liveProj = $liveProj;
+
+        return $this;
+    }
+
+    public function isAudio(): bool
+    {
+        return $this->audio;
+    }
+
+    public function setAudio(bool $audio): self
+    {
+        $this->audio = $audio;
+
+        return $this;
+    }
+
+    public function isLiveVideo(): bool
+    {
+        return $this->liveVideo;
+    }
+
+    public function setLiveVideo(bool $liveVideo): self
+    {
+        $this->liveVideo = $liveVideo;
+
+        return $this;
+    }
 
     /**
      * @var BookFormat[]

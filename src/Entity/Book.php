@@ -71,6 +71,57 @@ class Book
      */
     private bool $meap = false;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private bool $liveProj = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private bool $audio = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private bool $liveVideo = false;
+
+    public function isLiveProj(): bool
+    {
+        return $this->liveProj;
+    }
+
+    public function setLiveProj(bool $liveProj): self
+    {
+        $this->liveProj = $liveProj;
+
+        return $this;
+    }
+
+    public function isAudio(): bool
+    {
+        return $this->audio;
+    }
+
+    public function setAudio(bool $audio): self
+    {
+        $this->audio = $audio;
+
+        return $this;
+    }
+
+    public function isLiveVideo(): bool
+    {
+        return $this->liveVideo;
+    }
+
+    public function setLiveVideo(bool $liveVideo): self
+    {
+        $this->liveVideo = $liveVideo;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
