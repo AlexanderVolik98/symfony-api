@@ -30,6 +30,7 @@ class SignUpRequest implements ModelValidatableInterface
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Length(8)
      */
     private string $confirmPassword;
 

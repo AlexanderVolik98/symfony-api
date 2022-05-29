@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use App\Model\ErrorResponse;
 use App\Model\SubscriberRequest;
 use App\Service\SubscriberService;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use OpenApi\Annotations as OA;
-use App\Model\ErrorResponse;
 
 class SubcribeController extends AbstractController
 {
@@ -21,7 +21,7 @@ class SubcribeController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/subscribe", name="subscribe", methods={"POST"})
+     * @Route("/api/v1/book/subscribe", priority=20, name="subscribe", methods={"POST"})
      * @OA\Response(
      *     ref="/api/v1/book/subscribe",
      *     response=200,

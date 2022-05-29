@@ -26,11 +26,10 @@ class BookController extends AbstractController
      * @OA\Response(
      *     ref="/api/v1/book/category/{id}/books",
      *     response=200,
-     *     description="поаыдлавоыдавоыдал",
+     *     description="get Books by category id",
      *     @Model(type=BookListResponse::class)
      * )
      * @OA\Response (
-     *     ref="/api/v1/book/category/{id}/books",
      *     response=404,
      *     description="book category not found",
      *     @Model(type=ErrorResponse::class)
@@ -44,15 +43,13 @@ class BookController extends AbstractController
     /**
      * @Route("/api/v1/book/{id}", name="book", methods={"GET"})
      * @OA\Response(
-     *     ref="/api/v1/book/{id}",
      *     response=200,
-     *     description="поаыдлавоыдавоыдал",
+     *     description="get book by id",
      *     @Model(type=BookDetails::class)
      * )
      * @OA\Response (
-     *     ref="/api/v1/book/category/{id}/books",
      *     response=404,
-     *     description="book category not found",
+     *     description="book not found",
      *     @Model(type=ErrorResponse::class)
      * )
      */

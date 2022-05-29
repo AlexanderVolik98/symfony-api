@@ -28,6 +28,7 @@ class BookRepository extends ServiceEntityRepository
 
     public function getById(int $id): Book
     {
+        /** @var Book $book */
         $book = $this->find($id);
 
         if (null === $book) {

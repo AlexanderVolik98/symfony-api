@@ -24,19 +24,19 @@ class AuthController extends AbstractController
     /**
      * @Route("/api/v1/auth/signUp", name="signUp", methods={"POST"})
      * @OA\Response(
-     *     ref="/api/v1/auth/signUp",
      *     response=200,
      *     description="Sign up user",
-     *     @Model(type=IdResponse::class)
+     *     @OA\JsonContent(
+     *     @OA\Property(property="token", type="string"),
+     *     @OA\Property(property="refresh_token", type="string")
+     *      ),
      * )
      * @OA\Response(
-     *     ref="/api/v1/auth/signUp",
      *     response=409,
      *     description="User already exists",
      *     @Model(type=ErrorResponse::class)
      * )
      * @OA\Response(
-     *     ref="/api/v1/auth/signUp",
      *     response=400,
      *     description="Validation error",
      *     @Model(type=ErrorResponse::class)
