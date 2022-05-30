@@ -18,6 +18,9 @@ class BookMapperTest extends AbstractTestCase
             ->setImage('img')
             ->setAuthors(['tester'])
             ->setMeap(true)
+            ->setLiveVideo(true)
+            ->setLiveProj(true)
+            ->setAudio(true)
             ->setPublicationDate(new DateTimeImmutable('2020-10-10'));
 
         $this->setEntityId($book, 1);
@@ -29,6 +32,9 @@ class BookMapperTest extends AbstractTestCase
             ->setAuthors(['tester'])
             ->setImage('img')
             ->setMeap(true)
+            ->setLiveVideo(true)
+            ->setLiveProj(true)
+            ->setAudio(true)
             ->setPublicationDate(1602288000);
 
         $this->assertEquals($expected, BookMapper::map($book, new BookDetails()));

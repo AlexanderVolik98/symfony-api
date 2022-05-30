@@ -81,6 +81,9 @@ class BookServiceTest extends AbstractTestCase
             ->setIsbn('123123')
             ->setDescription('test desc')
             ->setImage('test Image')
+            ->setLiveVideo(true)
+            ->setLiveProj(true)
+            ->setAudio(true)
             ->setCategories(new ArrayCollection())
             ->setPublicationDate(new DateTimeImmutable('2020-10-10'))
             ->setAuthors(['f']);
@@ -96,6 +99,9 @@ class BookServiceTest extends AbstractTestCase
             ->setTitle('Test Book')
             ->setSlug('test-book')
             ->setMeap(false)
+            ->setLiveVideo(true)
+            ->setLiveProj(true)
+            ->setAudio(true)
             ->setImage('test Image')
             ->setPublicationDate(1602288000)
             ->setAuthors(['f']);
