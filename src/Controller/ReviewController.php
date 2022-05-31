@@ -21,7 +21,7 @@ class ReviewController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/{id}/reviews", name="reviews", methods={"GET"})
+     * @Route("/api/v1/books/{id}/reviews", name="reviews", methods={"GET"})
      * @OA\Parameter(name="page", in="query", description="review page number", @OA\Schema(type="integer"))
      * @OA\Response(
      *     response=200,

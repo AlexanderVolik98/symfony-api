@@ -24,7 +24,7 @@ class AuthController extends AbstractController
     /**
      * @Route("/api/v1/auth/signUp", name="signUp", methods={"POST"})
      * @OA\Response(
-     *     response=200,
+     *     response=201,
      *     description="Sign up user",
      *     @OA\JsonContent(
      *     @OA\Property(property="token", type="string"),

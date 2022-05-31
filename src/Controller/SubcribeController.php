@@ -21,10 +21,10 @@ class SubcribeController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/subscribe", priority=20, name="subscribe", methods={"POST"})
+     * @Route("/api/v1/newsletter/subscribe", priority=20, name="subscribe", methods={"POST"})
      * @OA\Response(
-     *     ref="/api/v1/book/subscribe",
-     *     response=200,
+     *     ref="/api/v1/newsletter/subscribe",
+     *     response=201,
      *     description="подписка на новостную рассылку",
      *     @Model(type=SubscriberRequest::class)
      * )

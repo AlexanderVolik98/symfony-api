@@ -67,6 +67,11 @@ class BookService
             ->setCategories($categories->toArray());
     }
 
+    public function getBestBooks(): BookDetails
+    {
+        $books = $this->bookRepository->getById($id);
+    }
+
     /**
      * @param Collection<BookToBookFormat> $formats
      * @return array

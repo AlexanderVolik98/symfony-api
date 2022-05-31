@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use App\Exception\BookNotFoundException;
-use App\Model\BookDetails;
+use App\Model\BookListItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -34,6 +34,14 @@ class BookRepository extends ServiceEntityRepository
         if (null === $book) {
             throw new BookNotFoundException();
         }
+
+        return $book;
+    }
+
+    public function getBestSellersBooks(int $id): BookListItem
+    {
+        /** @var Book $book */
+        $books = $this->find('', '');
 
         return $book;
     }

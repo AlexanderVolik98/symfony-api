@@ -26,6 +26,15 @@ class Book
     private ?string $title;
 
     /**
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private int $count;
+
+    /**
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private int $saleCount;
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private ?string $image;
@@ -44,6 +53,12 @@ class Book
      * @ORM\Column(name="sbn", type="string", length=13)
      */
     private string $isbn;
+
+    /**
+     * @var Collection<Review>
+     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="id")
+     */
+    private Collection $reviews;
 
     /**
      * @ORM\Column(type="text", length=255)
@@ -94,6 +109,30 @@ class Book
     public function setLiveProj(bool $liveProj): self
     {
         $this->liveProj = $liveProj;
+
+        return $this;
+    }
+
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    public function setCount(bool $count): self
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    public function getSaleCount(): int
+    {
+        return $this->saleCount;
+    }
+
+    public function setSaleCount(int $saleCount): self
+    {
+        $this->saleCount = $saleCount;
 
         return $this;
     }
@@ -152,12 +191,6 @@ class Book
 
         return $this;
     }
-
-    /**
-     * @var Collection<Review>
-     * @ORM\OneToMany(targetEntity=Review::class, mappedBy="id")
-     */
-    private Collection $reviews;
 
     public function getId(): ?int
     {

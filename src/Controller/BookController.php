@@ -22,7 +22,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/category/{id}/books", name="category", methods={"GET"})
+     * @Route("/api/v1/books/category/{id}", name="category", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="get Books by category id",
@@ -40,7 +40,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/{id}", name="book", methods={"GET"})
+     * @Route("/api/v1/books/{id}", name="book", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="get book by id",
@@ -55,5 +55,18 @@ class BookController extends AbstractController
     public function bookById(int $id): Response
     {
         return $this->json($this->bookService->getBookById($id));
+    }
+
+    /**
+     * @Route("/api/v1/books/best", name="book", methods={"GET"})
+     * @OA\Response(
+     *     response=200,
+     *     description="get bestsellers",
+     *     @Model(type=BookDetails::class)
+     * )
+     */
+    public function booksBest(): Response
+    {
+        return $this->json($this->bookService->getBestBooks());
     }
 }

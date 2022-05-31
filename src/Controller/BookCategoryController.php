@@ -20,7 +20,7 @@ class BookCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/api/v1/book/categories", name="categories", methods={"GET"})
+     * @Route("/api/v1/books/categories", name="categories", methods={"GET"})
      * @OA\Response(
      *     response=200,
      *     description="get books for category section",
