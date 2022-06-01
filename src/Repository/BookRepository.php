@@ -10,6 +10,8 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class BookRepository extends ServiceEntityRepository
 {
+    private const COUNT_SALES_BOOK_FOR_BESTSELLER = 300;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);
@@ -38,11 +40,8 @@ class BookRepository extends ServiceEntityRepository
         return $book;
     }
 
-    public function getBestSellersBooks(int $id): BookListItem
+    public function getBestSellersBooks(): BookListItem
     {
-        /** @var Book $book */
-        $books = $this->find('', '');
-
-        return $book;
+        $query = $this->_em->createQuery("SELECT SUM(r.rating)/COUNT(r) as avgRating, b FROM App\Entity\Book b JOIN App\Entity\Review r WITH b = r.book GROUP BY b.id");
     }
 }

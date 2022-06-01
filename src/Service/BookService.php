@@ -69,7 +69,7 @@ class BookService
 
     public function getBestBooks(): BookDetails
     {
-        $books = $this->bookRepository->getById($id);
+        $books = $this->bookRepository->getBestSellersBooks();
     }
 
     /**
