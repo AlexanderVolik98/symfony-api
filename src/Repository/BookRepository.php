@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use App\Exception\BookNotFoundException;
-use App\Model\BookListItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,8 +39,12 @@ class BookRepository extends ServiceEntityRepository
         return $book;
     }
 
-    public function getBestSellersBooks(): BookListItem
+    public function getBestSellersBooks(): array
     {
-        $query = $this->_em->createQuery("SELECT SUM(r.rating)/COUNT(r) as avgRating, b FROM App\Entity\Book b JOIN App\Entity\Review r WITH b = r.book GROUP BY b.id");
+        $query = $this->_em->createQuery("SELECT b FROM App\Entity\Book b 
+        JOIN App\Entity\Review r 
+        WITH b = r.book WHERE b.saleCount > 200 GROUP BY b.id HAVING SUM(r.rating)/COUNT(r) > 1");
+
+        return $query->getResult();
     }
 }

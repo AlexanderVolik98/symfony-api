@@ -42,10 +42,12 @@ class BookService
             throw new BookCategoryNotFoundException();
         }
 
-        return new BookListResponse(array_map(
-            fn (Book $book) => BookMapper::map($book, new BookListItem()),
-            $this->bookRepository->findBooksByCategoryId($categoryId)
-        ));
+        $books = $this->bookRepository->findBooksByCategoryId($categoryId);
+
+        return new BookListResponse(
+            array_map(
+                fn (Book $book) => BookMapper::map($book, new BookListItem()), $books
+            ), count($books));
     }
 
     public function getBookById(int $id): BookDetails
@@ -67,14 +69,18 @@ class BookService
             ->setCategories($categories->toArray());
     }
 
-    public function getBestBooks(): BookDetails
+    public function getBestBooks(): BookListResponse
     {
         $books = $this->bookRepository->getBestSellersBooks();
+
+        return new BookListResponse(
+            array_map(
+                fn (Book $book) => BookMapper::map($book, new BookListItem()), $books
+            ), count($books));
     }
 
     /**
      * @param Collection<BookToBookFormat> $formats
-     * @return array
      */
     private function mapFormats(Collection $formats): array
     {

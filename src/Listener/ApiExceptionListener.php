@@ -43,7 +43,6 @@ class ApiExceptionListener
             $mapping = ExceptionMapping::fromCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        dd($throwable);
         if ($mapping->getCode() >= Response::HTTP_INTERNAL_SERVER_ERROR || $mapping->isLoggable()) {
             $this->logger->error($throwable->getMessage(), [
                 'trace' => $throwable->getTraceAsString(),
