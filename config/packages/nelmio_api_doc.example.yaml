@@ -1,7 +1,7 @@
 nelmio_api_doc:
     documentation:
         servers:
-            - url: # base url
+            - url: http://api.manning.dev
         info:
             title: API for manning.com
             description: https://github.com/AlexanderVolik98/symfony-api

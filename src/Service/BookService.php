@@ -23,6 +23,8 @@ class BookService
     private BookCategoryRepository $bookCategoryRepository;
     private ReviewRepository $reviewRepository;
     private RatingService $ratingService;
+    private const COUNT_BOOKS_FOR_ALSO_LIKE = 4;
+    private const COUNT_SALES_BOOK_FOR_BESTSELLER = 200;
 
     public function __construct(
         BookRepository $bookRepository,
@@ -71,7 +73,21 @@ class BookService
 
     public function getBestBooks(): BookListResponse
     {
-        $books = $this->bookRepository->getBestSellersBooks();
+        $books = $this->bookRepository->getBestSellersBooks(self::COUNT_SALES_BOOK_FOR_BESTSELLER);
+
+        return new BookListResponse(
+            array_map(
+                fn (Book $book) => BookMapper::map($book, new BookListItem()), $books
+            ), count($books));
+    }
+
+    public function getSimilarBooksById(int $id): BookListResponse
+    {
+        $categories = ($this->bookRepository->getById($id)->getCategories()->getValues());
+
+        $books = $this->bookRepository->getBooksByCategories($categories, self::COUNT_BOOKS_FOR_ALSO_LIKE);
+
+        shuffle($books);
 
         return new BookListResponse(
             array_map(
@@ -81,6 +97,7 @@ class BookService
 
     /**
      * @param Collection<BookToBookFormat> $formats
+     * @return array
      */
     private function mapFormats(Collection $formats): array
     {
